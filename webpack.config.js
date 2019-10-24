@@ -1,13 +1,13 @@
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ReplacePlugin = require('replace-bundle-webpack-plugin');
-const path = require('path');
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const ReplacePlugin = require('replace-bundle-webpack-plugin')
+const path = require('path')
 
-const ENV = process.env.NODE_ENV || 'development';
+const ENV = process.env.NODE_ENV || 'development'
 
-const CSS_MAPS = ENV !== 'production';
+const CSS_MAPS = ENV !== 'production'
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -105,10 +105,12 @@ module.exports = {
       },
       {
         test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-        use:
-          ENV === 'production'
-            ? 'file?name=[path][name]_[hash:base64:5].[ext]'
-            : 'url'
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: '[name].[ext]'
+          }
+        }
       }
     ]
   },
@@ -155,4 +157,4 @@ module.exports = {
     historyApiFallback: true,
     open: true
   }
-};
+}
